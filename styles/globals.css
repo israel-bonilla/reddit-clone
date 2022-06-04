@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .icon {
+    @apply h-9 w-6 lg:w-9 cursor-pointer rounded-sm lg:p-1 lg:hover:bg-neutral-800
+  }
+
+  .postBtn {
+    @apply flex items-center space-x-1 text-sm font-semibold p-2 hover:bg-neutral-800 cursor-pointer rounded-sm
+  }
+}
