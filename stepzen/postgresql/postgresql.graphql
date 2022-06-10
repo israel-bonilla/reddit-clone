@@ -51,10 +51,10 @@ type Query {
       type: "postgresql"
       schema: "public"
       query: """
-      select *, "post".id as id from "post"
-      join "subreddit" on "subreddit"."id" = "post"."subreddit_id"
-      where "subreddit"."topic" = $1
-      order by "post"."created_at" desc
+      SELECT *, "post".id AS id FROM "post"
+      JOIN "subreddit" ON "subreddit"."id" = "post"."subreddit_id"
+      WHERE "subreddit"."topic" = $1
+      ORDER BY "post"."created_at" DESC
       """
       configuration: "postgresql_config"
     )
@@ -63,7 +63,7 @@ type Query {
       type: "postgresql"
       schema: "public"
       query: """
-      select * from "public"."post" where "post"."id" = $1
+      SELECT * FROM "public"."post" WHERE "post"."id" = $1
       """
       configuration: "postgresql_config"
     )
@@ -72,8 +72,8 @@ type Query {
       type: "postgresql"
       schema: "public"
       query: """
-      select * from "public"."vote" where "post_id" = $1
-      order by "created_at" desc
+      SELECT * FROM "public"."vote" WHERE "post_id" = $1
+      ORDER BY "created_at" DESC
       """
       configuration: "postgresql_config"
     )
@@ -82,7 +82,7 @@ type Query {
       type: "postgresql"
       schema: "public"
       query: """
-      select * from "subreddit" where "id" = $1
+      SELECT * FROM "subreddit" WHERE "id" = $1
       """
       configuration: "postgresql_config"
     )
@@ -98,8 +98,8 @@ type Query {
       type: "postgresql"
       schema: "public"
       query: """
-      select * from "public"."comment" where "post_id" = $1
-      order by "created_at" desc
+      SELECT * FROM "public"."comment" WHERE "post_id" = $1
+      ORDER BY "created_at" DESC
       """
       configuration: "postgresql_config"
     )
@@ -108,8 +108,8 @@ type Query {
       type: "postgresql"
       schema: "public"
       query: """
-      select * from "post"
-      order by "created_at" desc
+      SELECT * FROM "post"
+      ORDER BY "created_at" DESC
       """
       configuration: "postgresql_config"
     )
@@ -125,8 +125,8 @@ type Query {
       type: "postgresql"
       schema: "public"
       query: """
-      select * from "subreddit"
-      order by "created_at" desc
+      SELECT * FROM "subreddit"
+      ORDER BY "created_at" DESC
       limit $1
       """
       configuration: "postgresql_config"
@@ -136,7 +136,7 @@ type Query {
       type: "postgresql"
       schema: "public"
       query: """
-      select * from "public"."subreddit" where "topic" = $1
+      SELECT * FROM "public"."subreddit" WHERE "topic" = $1
       """
       configuration: "postgresql_config"
     )
@@ -145,6 +145,16 @@ type Query {
       type: "postgresql"
       schema: "public"
       table: "vote"
+      configuration: "postgresql_config"
+    )
+  getPostsByUsername(username: String!): [Post]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT * FROM "public"."post" WHERE "username" = $1
+      ORDER BY "created_at" DESC
+      """
       configuration: "postgresql_config"
     )
 }

@@ -142,3 +142,36 @@ export const GET_SUBREDDIT_LIST_WITH_LIMIT = gql`
     }
   }
 `;
+
+export const GET_POSTS_BY_USERNAME = gql`
+  query MyQuery($username: String!) {
+    getPostsByUsername(username: $username) {
+      id
+      body
+      created_at
+      image
+      title
+      username
+      subreddit_id
+      comments {
+        created_at
+        id
+        post_id
+        text
+        username
+      }
+      subreddit {
+        created_at
+        id
+        topic
+      }
+      votes {
+        created_at
+        id
+        post_id
+        vote_type
+        username
+      }
+    }
+  }
+`;

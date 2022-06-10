@@ -113,7 +113,11 @@ const Post = ({ post }: Props) => {
                   className="font-bold text-neutral-300 hover:text-blue-400 hover:underline cursor-pointer"
                 >r/{post.subreddit[0]?.topic}</span>
               </Link>
-              <span className="text-gray-500"> · Posted by u/{post.username} <TimeAgo date={post.created_at} /></span>
+              <span className="text-gray-500"> · Posted by </span>
+              <Link href={`/user/${post.username}`}>
+                <span className="text-gray-500 hover:underline">u/{post.username}</span>              
+              </Link>
+              <span className="text-gray-500"> <TimeAgo date={post.created_at} /></span>
             </p>
           </div>
           
